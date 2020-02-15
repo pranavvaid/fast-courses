@@ -51,10 +51,10 @@ const Sticky = ({ className, children }) => {
 const Header = React.forwardRef(({ user, onTitleClick, ...rest }, ref) => (
   <header className="header" ref={ref} {...rest}>
     <h1 className="header-title">
-      <a href="/" onClick={e => { if (!e.metaKey) { e.preventDefault(); onTitleClick(); } }}>fast-courses<span>▸</span></a>
+      <a href="/" onClick={e => { if (!e.metaKey) { e.preventDefault(); onTitleClick(); } }}>cardinal-direction<span>▸</span></a>
     </h1>
     <p className="header-subtitle">
-      a better way to search Stanford courses* <span className="mobile-note"></span>
+      a better way to search COLLEGE_NAME courses* <span className="mobile-note"></span>
     </p>
     <p className="header-actions">
       <Link to="/explore">explore <span className="header-actions__label">alpha</span></Link>
@@ -72,12 +72,11 @@ const Welcome = ({ show, onDismiss }) => (
       <div className="hit__reviews__close" onClick={onDismiss}>✕</div>
       <div className="hit__body">
         <div>
-          <strong>Welcome to a better way to discover Stanford courses.</strong> fast-courses is like ExploreCourses meets Carta... 1000x faster.
+          <strong>Welcome to a better way to discover COLLEGE_NAME courses.</strong> cardinal-direction is a fork of fast-courses
 
           <ol>
             <li>Search above by course number, title, description, etc.</li>
             <li>Filter and sort by term, Ways, and more using the lefthand sidebar</li>
-            <li>Click "Expand for recent student reviews" at the bottom of any result to read what other Stanford students have to say about it</li>
             <li>Pin classes to this year's schedule by clicking the ☆ next to the time</li>
             <li>Plan classes for future years (on desktop) by clicking <span className="plan-button-example">plan</span> at the bottom right</li>
           </ol>
@@ -105,9 +104,7 @@ const sortUnits = items => {
 };
 
 const App = ({ location, history }) => {
-  // TODO: figure out
   const { user } = useAuth({ autoAuthenticate: true });
-  // const user = {name: "Rayan", classes: [], planner: []};
   const [searchState, setSearchState] = useState(urlToSearchState(location));
   const [debouncedSetState, setDebouncedSetState] = useState(null);
   const ref = useRef(null);
@@ -289,13 +286,12 @@ const App = ({ location, history }) => {
           <div className="attribution">
             <div>
               {util.intersperse([
-                <a className="ais-Menu-link" href="https://github.com/theopolisme/fast-courses" target="_blank">open source</a>,
+                <a className="ais-Menu-link" href="https://github.com/pranavvaid/fast-courses" target="_blank">open source</a>,
                 <Link className="ais-Menu-link" to="/terms">terms</Link>,
                 <Link className="ais-Menu-link" to="/privacy">privacy</Link>,
-                <a className="ais-Menu-link" href="mailto:tcp@stanford.edu">questions?</a>
               ], <React.Fragment>{' '}&middot;{' '}</React.Fragment>)}
             </div>
-            <div>* not affiliated with Stanford University</div>
+            <div>* not affiliated with COLLEGE_NAME University</div>
           </div>
         </div>
         {!isMobile && PageRightPanel}

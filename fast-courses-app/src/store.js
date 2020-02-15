@@ -43,7 +43,7 @@ const persistUpdate = ({ field, op, value }) => {
   .then(r => r.json())
   .catch(e => {
     console.error(e);
-    window.alert(`Failed to save changes. Are you offline, or perhaps did your Stanford authentication token expire? Please refresh and try again, sorry :-(`);
+    window.alert(`Failed to save changes. Are you offline, or perhaps did your COLLEGE_NAME authentication token expire? Please refresh and try again, sorry :-(`);
   });
 }
 
