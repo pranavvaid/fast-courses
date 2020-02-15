@@ -289,7 +289,6 @@ const App = ({ location, history }) => {
                 <a className="ais-Menu-link" href="https://github.com/pranavvaid/fast-courses" target="_blank">open source</a>,
                 <Link className="ais-Menu-link" to="/terms">terms</Link>,
                 <Link className="ais-Menu-link" to="/privacy">privacy</Link>,
-                <a className="ais-Menu-link" href="mailto:tcp@stanford.edu">questions?</a>
               ], <React.Fragment>{' '}&middot;{' '}</React.Fragment>)}
             </div>
             <div>* not affiliated with COLLEGE_NAME University</div>
