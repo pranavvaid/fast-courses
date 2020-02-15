@@ -128,7 +128,8 @@ const serializeUserSession = (session, data) => ({
     }
   }));
 
-  app.get('/login', (req, res) => {
+  // TODO: maybe reenable this
+  /*app.get('/login', (req, res) => {
     const endpoint = `${process.env.AUTH_DOMAIN}oauth2/authorize?${qs.stringify({
       identity_provider: 'Stanford',
       redirect_uri: `${process.env.APP_DOMAIN}authenticate`,
@@ -160,6 +161,34 @@ const serializeUserSession = (session, data) => ({
       await db.collection('users').updateOne({ _id: email }, {
         $set: { last_login: now },
         $setOnInsert: { first_login: now, classes: [] }
+      }, { upsert: true });*/
+  // TODO: enable real logging in
+  app.get('/login', (req, res) => {
+    const endpoint = `authorize?${qs.stringify({
+      identity_provider: 'Self',
+      redirect_uri: `${process.env.APP_DOMAIN}/authenticate`,
+      // client_id: process.env.AUTH_CLIENT_ID,
+      response_type: 'code',
+      scope: 'email'
+    })}`;
+    req.session.redirect = req.query.redirect;
+    res.redirect(endpoint);
+  });
+
+  app.get('/authorize', (req, res) => {
+    res.set('Content-Type', 'text/html')
+    res.send("<form action={} method='get'><input name='email' type='text'/><input type='submit' value='Submit'\></form>".replace("{}", req.query.redirect_uri))
+  });
+
+  app.get('/authenticate', asyncHandler(async (req, res, next) => {
+    try {
+      const email = req.query.email;
+      req.session.user = email;
+
+      const now = (new Date()).toISOString();
+      await db.collection('users').updateOne({ _id: email }, {
+        $set: { last_login: now },
+        $setOnInsert: { first_login: now, classes: [] }
       }, { upsert: true });
 
       const redirect = req.session.redirect;
@@ -171,7 +200,7 @@ const serializeUserSession = (session, data) => ({
     }
   }));
 
-  app.get('/meta/ratings', asyncHandler(async (req, res) => {
+  app.get('/meta/ratings', asyncHandler(async (req, res) => {parse;
     if (req.query.secret !== process.env.SECRET) {
       return res.status(401).send({ error: { message: 'Not authorized' } });
     }

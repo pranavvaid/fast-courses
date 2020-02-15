@@ -23,6 +23,7 @@ import Planner from './screens/Planner';
 import HitOverlay from './screens/HitOverlay';
 import Terms from './screens/Terms';
 import Privacy from './screens/Privacy';
+import Explore from './screens/Explore';
 
 import IconButton from './partials/IconButton';
 import Hits from './partials/Hits';
@@ -56,6 +57,8 @@ const Header = React.forwardRef(({ user, onTitleClick, ...rest }, ref) => (
       a better way to search Stanford courses* <span className="mobile-note"></span>
     </p>
     <p className="header-actions">
+      <Link to="/explore">explore <span className="header-actions__label">alpha</span></Link>
+      <span className="header-actions__spacer" />
       <Link to="/planner">planner <span className="header-actions__label">beta</span></Link>
       <span className="header-actions__spacer" />
       <span className="header-user">{user.name}</span>
@@ -102,7 +105,9 @@ const sortUnits = items => {
 };
 
 const App = ({ location, history }) => {
+  // TODO: figure out
   const { user } = useAuth({ autoAuthenticate: true });
+  // const user = {name: "Rayan", classes: [], planner: []};
   const [searchState, setSearchState] = useState(urlToSearchState(location));
   const [debouncedSetState, setDebouncedSetState] = useState(null);
   const ref = useRef(null);
@@ -163,7 +168,6 @@ const App = ({ location, history }) => {
 
   const store = useStore({ user });
 
-  // Render nothing until authenticated
   if (!user) {
     return <div />;
   }
@@ -326,6 +330,7 @@ const App = ({ location, history }) => {
       <Route path={`/courses/:slug/:courseId?`} render={props => <HitOverlay {...props} showExtended={true} store={store} />} />
       <Route path={`/terms`} render={props => <Terms {...props} />} />
       <Route path={`/privacy`} render={props => <Privacy {...props} />} />
+      <Route path={`/explore`} render={props => <Explore {...props} />} />
       {body}
     </InstantSearch>
   );

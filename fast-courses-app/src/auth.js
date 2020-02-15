@@ -36,6 +36,7 @@ export const useAuth = ({ autoAuthenticate }) => {
     }
   }, [needsAuth, autoAuthenticate]);
 
+
   return {
     needsAuth,
     user,
