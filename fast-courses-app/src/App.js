@@ -235,17 +235,6 @@ const App = ({ location, history }) => {
             showMore
           />
         </Panel>
-
-        <Panel header="Sort By">
-          <SortBy
-            defaultRefinement="courses"
-            items={[
-              { value: 'courses', label: 'Best match' },
-              { value: 'courses_number_asc', label: 'Course number' },
-              { value: 'courses_raw_rating_desc', label: 'Raw rating' },
-            ]}
-          />
-        </Panel>
       </div>
     </SidebarContainer>
   );
@@ -317,7 +306,7 @@ const App = ({ location, history }) => {
   return (
     <InstantSearch
       searchClient={searchClient}
-      indexName="courses"
+      indexName="treehacks"
       searchState={searchState}
       onSearchStateChange={onSearchStateChange}
       createURL={createURL}
