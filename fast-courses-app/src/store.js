@@ -36,12 +36,20 @@ const fetchPrereqs = (courses) => {
     .then(r => r.text());
 }
 
+async function fetchPrereqsOf(course) {
+  let result;
+  let promise = fetch(`${process.env.REACT_APP_ENDPOINT}listreqs?class=${course}`, { credentials: 'include' })
+    .then(r => r.text()).then(r => result = r.split("+"));
+  await promise;
+  return result;
+}
+
 async function fetchPrereqsAll(courses) {
   let promises = courses.map(course => (fetchPrereqs([course.number]).then((res, err) => {course.reqs = res.split("+")})));
   await Promise.all(promises);
 }
 
-export { fetchPrereqsAll, fetchPrereqs }
+export { fetchPrereqsAll, fetchPrereqs, fetchPrereqsOf }
 
 const persistUpdate = ({ field, op, value }) => {
   return fetch(`${process.env.REACT_APP_ENDPOINT}self`, {

@@ -29,6 +29,7 @@ const Hit = ({ hit, store, showExtended, hideSchedule, hiddenScheduleYear, planT
   const data = open ? getExtendedData(hit.objectID) : {};
 
   const courseLink = util.makeCourseLink(hit);
+  const prereqLink = util.makePrereqLink(hit);
 
   return (
     <div className="hit">
@@ -40,6 +41,7 @@ const Hit = ({ hit, store, showExtended, hideSchedule, hiddenScheduleYear, planT
           <Score score={hit.currentScore} count={hit.currentScoreCount} latest />
         </span>
         {!fromOverlay && <Link to={courseLink} className="hit__header__open"><IconButton icon="open_in_new" /></Link>}
+        <Link to={prereqLink} className="hit__header__open">View prereqs</Link>
       </div>
       <div className="hit__body">
         {util.formatCourseDescription(hit.description, (match, subject, number) => {

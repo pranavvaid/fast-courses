@@ -209,6 +209,14 @@ const serializeUserSession = (session, data) => ({
     py.stdout.on('data', (d) => data += d.toString());
   }));
 
+  app.get('/listreqs', asyncHandler(async (req, res) => {
+    // Follows process from https://www.sohamkamani.com/blog/2015/08/21/python-nodejs-comm/
+    let py = spawn('python3', ['prereqs/prereqsFor.py', req.query.class]);
+    let data = "";
+    py.on('close', () => {res.send(data)});
+    py.stdout.on('data', (d) => data += d.toString());
+  }));
+
   app.get('/meta/ratings', asyncHandler(async (req, res) => {parse;
     if (req.query.secret !== process.env.SECRET) {
       return res.status(401).send({ error: { message: 'Not authorized' } });

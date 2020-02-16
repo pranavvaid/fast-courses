@@ -4,6 +4,7 @@ import replace from 'string-replace-to-array';
 import { COURSE_REGEX } from './config';
 
 export const makeCourseLink = c => `/courses/${c.number.replace(/[^a-z0-9]/i, '')}/${c.objectID}`;
+export const makePrereqLink = c => `/prereqs/${c.number.replace(/[^a-z0-9]/i, '')}/`;
 
 export function formatDays(days) {
   return days.replace(/\w+/g, w => {

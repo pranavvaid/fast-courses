@@ -24,6 +24,7 @@ import HitOverlay from './screens/HitOverlay';
 import Terms from './screens/Terms';
 import Privacy from './screens/Privacy';
 import Explore from './screens/Explore';
+import Prereq from './screens/Prereq';
 
 import IconButton from './partials/IconButton';
 import Hits from './partials/Hits';
@@ -322,6 +323,7 @@ const App = ({ location, history }) => {
     >
       <Route path={`/planner`} render={props => <Planner {...props} store={store} />} />
       <Route path={`/courses/:slug/:courseId?`} render={props => <HitOverlay {...props} showExtended={true} store={store} />} />
+      <Route path={`/prereqs/:courseId/`} render={props => <Prereq store={store} history={history} {...props} />} />
       <Route path={`/terms`} render={props => <Terms {...props} />} />
       <Route path={`/privacy`} render={props => <Privacy {...props} />} />
       <Route path={`/explore`} render={props => <Explore {...props} />} />
