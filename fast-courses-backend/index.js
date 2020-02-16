@@ -9,6 +9,7 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const app = express();
+const spawn = require('child_process').spawn
  
 const { decodeAccessToken } = require('./auth');
 
@@ -198,6 +199,14 @@ const serializeUserSession = (session, data) => ({
       if (err.response && err.response.data) { return next(new Error(err.response.data.error)); }
       return next(err);
     }
+  }));
+
+  app.get('/prereqs', asyncHandler(async (req, res) => {
+    // Follows process from https://www.sohamkamani.com/blog/2015/08/21/python-nodejs-comm/
+    let py = spawn('python3', ['prereqs/retrieve.py', req.query.classes]);
+    let data = "";
+    py.on('close', () => {res.send(data)});
+    py.stdout.on('data', (d) => data += d.toString());
   }));
 
   app.get('/meta/ratings', asyncHandler(async (req, res) => {parse;

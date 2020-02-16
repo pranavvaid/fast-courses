@@ -16,7 +16,7 @@ import ReactSidebar from 'react-sidebar';
 import { Link, Route } from 'react-router-dom';
 
 import { useAuth } from './auth';
-import { searchClient, useStore } from './store';
+import { searchClient, useStore, fetchPrereqsAll, fetchPrereqs } from './store';
 import * as util from './util';
 
 import Planner from './screens/Planner';
@@ -28,6 +28,7 @@ import Explore from './screens/Explore';
 import IconButton from './partials/IconButton';
 import Hits from './partials/Hits';
 import RightPanel from './partials/RightPanel';
+import CourseRefinementList from './partials/Courses';
 
 import 'instantsearch.css/themes/algolia.css';
 import './App.css';
@@ -171,10 +172,18 @@ const App = ({ location, history }) => {
 
   const SidebarContainer = isMobile ? 'div' : Sticky;
 
+  let courses = store.getAllClasses().map(c => store.getCourse({id: c}));
+  fetchPrereqsAll(courses);
+  // let courses = [{number: "CS 106A", reqs: ["CS 106B"]}, {number: "CS 106B", reqs: ["CS 107", "CS 103"]}, {number: "CS 107", reqs: ["CS 110", "CS 108"]}];
   const PageLeftPanel = (
     <SidebarContainer className="search-panel__filters">
       <div>
         <ClearRefinements />
+        <Panel header="Filter by Prereqs">
+          <div id="filter_prereq">
+          </div>
+          <CourseRefinementList attribute="number" courses={courses} />
+        </Panel>
 
         <Panel header="Term">
           <RefinementList

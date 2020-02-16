@@ -31,6 +31,18 @@ const fetchExtendedCourse = (id) => {
     .then(r => r.json());
 }
 
+const fetchPrereqs = (courses) => {
+  return fetch(`${process.env.REACT_APP_ENDPOINT}prereqs?classes=${courses.join("-")}`, { credentials: 'include' })
+    .then(r => r.text());
+}
+
+async function fetchPrereqsAll(courses) {
+  let promises = courses.map(course => (fetchPrereqs([course.number]).then((res, err) => {course.reqs = res.split("+")})));
+  await Promise.all(promises);
+}
+
+export { fetchPrereqsAll, fetchPrereqs }
+
 const persistUpdate = ({ field, op, value }) => {
   return fetch(`${process.env.REACT_APP_ENDPOINT}self`, {
     method: 'POST',
@@ -172,6 +184,12 @@ export const useStore = ({ user }) => {
       });
       setAppData({ ...appData, classes });
       persistUpdate({ field: 'classes', op: '$set', value: classes });
+    },
+    getAllClasses: () => {
+      const planner = user.planner;
+      const class_ids = Object.keys(planner).map(key => planner[key]).reduce((a, b) => a.concat(b), []);
+
+      return class_ids;
     },
     getClassesForTerm: termId => {
       const classes = appData.classes.map(c => cache[c]).filter(c => c && c.termId === termId);
