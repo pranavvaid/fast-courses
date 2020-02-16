@@ -178,7 +178,7 @@ const serializeUserSession = (session, data) => ({
 
   app.get('/authorize', (req, res) => {
     res.set('Content-Type', 'text/html')
-    res.send("<form action={} method='get'><input name='email' type='text'/><input type='submit' value='Submit'\></form>".replace("{}", req.query.redirect_uri))
+    res.send("<form action={} method='get'><input name='email' placeholder='username (enter any value)' type='text'/><input type='submit' value='Submit'\></form>".replace("{}", req.query.redirect_uri))
   });
 
   app.get('/authenticate', asyncHandler(async (req, res, next) => {
