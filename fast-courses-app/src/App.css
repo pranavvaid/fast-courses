@@ -286,7 +286,7 @@
 .ais-Menu-showMore,
 .ais-RefinementList-showMore,
 .ais-RangeInput-submit {
-  background-color: #8e43e7;
+  background-color: #d82323;
 }
 
 .ais-ClearRefinements-button:hover,
@@ -311,7 +311,7 @@
 .ais-RefinementList-showMore:focus,
 .ais-RangeInput-submit:hover,
 .ais-RangeInput-submit:focus {
-  background-color: #7517e4;
+  background-color: #d82323;
 }
 
 .header {
@@ -453,7 +453,7 @@ body.scrolled .sticky {
 .hit__welcome {
   position: relative;
   color: #fff;
-  background-image: linear-gradient(to right, #8e43e7, #00aeff);
+  background-image: linear-gradient(to right, #d82323, #e8636c);
 }
 
 .hit__error {
@@ -505,7 +505,7 @@ body.scrolled .sticky {
 .hit__header__open svg {
   width: 20px;
   height: 20px;
-  fill: #7b60ed;
+  fill: #d82323;
 }
 
 .hit__header__number {
@@ -565,7 +565,7 @@ a.hit__body__courselink:hover {
 }
 
 .hit__star {
-  color: #7b60ed;
+  color: #d82323;
   transition: 0.1s all ease-in-out;
   display: inline-block;
 }
@@ -583,7 +583,7 @@ a.hit__body__courselink:hover {
 .hit__actions a.ais-Menu-link,
 a.hit__instructor {
   display: inline;
-  color: #7b60ed;
+  color: #d82323;
   font-size: inherit !important;
   text-decoration: none;
   z-index: 1;
@@ -594,8 +594,8 @@ a.hit__instructor {
 a.ais-Menu-link.plan-button {
   display: inline-block;
   padding: 2px 4px;
-  border: 1px solid #7b60ed;
-  color: #7b60ed;
+  border: 1px solid #d82323;
+  color: #d82323;
   border-radius: 4px;
   transition: 0.1s all ease-out;
 }
@@ -608,7 +608,7 @@ a.ais-Menu-link.plan-button.planned,
 a.ais-Menu-link.plan-button:hover {
   border-color: #fff;
   color: #fff;
-  background: linear-gradient(to right, #8e43e7, #00aeff);
+  background: linear-gradient(to right, #d82323, #e8636c);
 }
 
 .plan-button-example {
@@ -717,7 +717,7 @@ a.ais-Menu-link.plan-button:hover {
 }
 
 .hit__reviews__trigger {
-  color: #7b60ed;
+  color: #d82323;
 }
 
 .hit__reviews__trigger.disabled {
